@@ -1,0 +1,140 @@
+﻿@model ViewModel
+
+@section style{
+<link rel="stylesheet" href="~/css/FormStyle.css" />
+}
+
+@{
+    var pager = new PaginationModel();
+    int pageNo = 0;
+    if (ViewBag.pager != null)
+    {
+        pager = ViewBag.pager;
+        pageNo = pager.CurrentPage;
+    }
+}
+<div class="container" style="margin:10px">
+    @*Show alert message hear*@
+    @*To fix problam of validation error add true *@
+    @if (ViewBag.IsSuccess == true)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Holy guacamole!</strong> You have added new book successfuly. <br />
+            Click <a asp-controller="Book" asp-action="GetBook" asp-route-id="@ViewBag.BookId">hear</a> to see mor details.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    <button class="btn btn-outline-primary" id="AddNewBook">Add New Book</button>
+</div>
+
+<div class="container">
+    <table class="table">
+
+        <thead>
+            <tr>
+                <th>Cover</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Language</th>
+                <th>Category</th>
+                <th>Releas Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @for (var i = 0; i < Model.CurrentPageData.Count(); i++)
+            {
+
+                var rowColor = i % 2 == 0 ? "rgb(242, 242, 242)" : "rgb(140, 140, 140)";
+
+                <tr style="background-color: @rowColor">
+                    <td><a asp-route="BookDetails" asp-route-Id="@Model.CurrentPageData[i].ID"><img src="@Model.CurrentPageData[i].CoverImageUrl" alt="cover" style="width:30px; height:50px;" /></a></td>
+                    <td>@Model.CurrentPageData[i].Title</td>
+                    <td>@Model.CurrentPageData[i].Author</td>
+                    <td>@Model.CurrentPageData[i].Language</td>
+                    <td>@Model.CurrentPageData[i].Category</td>
+                    <td>@Model.CurrentPageData[i].ReleaseDate</td>
+                    <td>
+                        <a class="btn btn-danger" asp-controller="Book" asp-action="DeleteBook" asp-route-id="@Model.CurrentPageData[i].ID">Delete</a>
+                        <a class="btn btn-warning" onclick="edit(@Model.CurrentPageData[i].ID)">Edit</a>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="container">
+        @if (pager.TotalPages > 0)
+        {
+            <ul class="pagination justify-content-end">
+                @if (pager.CurrentPage > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="Book" asp-action="AddNewBook" asp-route-pg="1">First</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="Book" asp-action="AddNewBook" asp-route-pg="@(pager.CurrentPage - 1)">Previous</a>
+                    </li>
+                }
+
+                @for (var i = pager.StartPage; i <= pager.EndPage; i++)
+                {
+                    <li class="page-item @(i == pager.CurrentPage ? "active" : "")">
+                        <a class="page-link" asp-controller="Book" asp-action="AddNewBook" asp-route-pg="@i">@i</a>
+                    </li>
+                }
+
+                @if (pager.CurrentPage < pager.TotalPages)
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="Book" asp-action="AddNewBook" asp-route-pg="@(pager.CurrentPage + 1)">Next</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="Book" asp-action="AddNewBook" asp-route-pg="@pager.TotalPages">End</a>
+                    </li>
+                }
+            </ul>
+        }
+    </div>
+</div>
+
+<div class="container">
+    
+    <div class="add-new-book" id="new-book-form" style="display:none">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" id="close-new-book"></button>
+        <partial name="_BookForm" model="Model.Book" />
+    </div>
+
+    @*Addtable hear*@
+</div>
+
+@*Scripts to close the forme *@
+@section scripts{
+<script>
+    let btnClose = document.getElementById("close-new-book");
+    let btnAdd = document.getElementById("AddNewBook");
+    let form = document.getElementById("new-book-form");
+    
+    function edit(id){
+        form.style.display = "block";
+    }
+
+    btnAdd.addEventListener("click", () => {
+        form.style.display = "block";
+    });
+
+    btnClose.addEventListener("click", () => {
+        form.style.display = "none";
+    });
+
+    function myComplete(data){
+        alert("Process completed!");
+    }
+
+    function mySuccess(data){
+        alert("Process finished successfully!");
+    }
+</script>
+}

@@ -1,0 +1,78 @@
+﻿@model BookModel
+
+
+<form method="post" enctype="multipart/form-data" asp-controller="book" asp-actin="AddNewBook">
+    <div class="mb-3">
+        <label asp-for="Title" class="form-label">Title</label>
+        <input asp-for="Title" class="form-control">
+        @*Add a span tag to show validation message *@
+        <span asp-validation-for="Title" class="text-danger" style="font-size:10px"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Author" class="form-label">Author</label>
+        <input asp-for="Author" class="form-control" value="Author_ ">
+        @*Add a span tag to show validation message *@
+        <span asp-validation-for="Author" class="text-danger" style="font-size:10px"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Category" class="form-label">Category</label>
+        <input asp-for="Category" class="form-control">
+        @*Add a span tag to show validation message *@
+        <span asp-validation-for="Category" class="text-danger" style="font-size:10px"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label">Description</label>
+        <textarea input asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger" style="font-size:10px"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="LanguageID" class="form-label">Language</label>
+        <select asp-for="LanguageID" class="form-control" asp-items="ViewBag.Language"></select>
+        @*Add a span tag to show validation message *@
+        <span asp-validation-for="LanguageID" class="text-danger" style="font-size:10px"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Pages" class="form-label">Pages</label>
+        <input type="number" input asp-for="Pages" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ReleaseDate" class="form-label">ReleaseDate</label>
+        <input input asp-for="ReleaseDate" class="form-control" />
+    </div>
+
+    @*<div class="mb-3">*@
+        @*<label for="exampleInputPassword1" class="form-label">Image</label>*@
+        @*<input input asp-for="Image" class="form-control" />*@
+        @*Add a span tag to show validation message *@
+        @*<span asp-validation-for="Image" class="text-danger" style="font-size:10px"></span>*@
+    @*</div>*@
+
+    <div class="mb-3">
+        <label asp-for="CoverPhoto" class="form-label">Cover photo</label>
+        <input asp-for="CoverPhoto" class="form-control">
+        @*Add a span tag to show validation message *@
+        <span asp-validation-for="CoverPhoto" class="text-danger" style="font-size:10px"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="GalleryFile" class="form-label">Gallery</label>
+        <input asp-for="GalleryFile" class="form-control">
+        @*Add a span tag to show validation message *@
+        <span asp-validation-for="GalleryFile" class="text-danger" style="font-size:10px"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="BookPdf" class="form-label">PDF</label>
+        <input asp-for="BookPdf" class="form-control">
+        @*Add a span tag to show validation message *@
+        <span asp-validation-for="BookPdf" class="text-danger" style="font-size:10px"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

@@ -1,0 +1,74 @@
+﻿@using Microsoft.Extensions.Configuration
+@using Microsoft.Extensions.Options
+@inject IConfiguration configuration
+@*@inject IOptionsSnapshot<NewBookAlertModel> newBookAlertModel*@
+@inject IOptionsSnapshot<NewBookAlertModel> _newBookAlertModel
+
+@{
+    var newBookAlertModel = _newBookAlertModel.Get("InternalBook");
+    var thirdPartyBook = _newBookAlertModel.Get("ThirdPartyBook");
+
+    ////Using to remove object name (firtt part) of GetValue*
+    //var newBook = configuration.GetSection("NewBookAlert");
+
+    //var newBook = new NewBookAlertModel();
+    ////binding NewBookAlertModel to appsettings.json object
+    //configuration.Bind("NewBookAlert", newBook);
+}
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/"><img src="~/Images/Logo.png" alt="Logo" class="logo" />@configuration["Appname"]</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link @((string)ViewData["Title"] == "Home Page" ? "active" : "")" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @((string)ViewData["Title"] == "Contact Us" ? "active" : "")" asp-controller="Home" asp-action="ContactUs">Contact us</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link @((string)ViewData["Title"] == "About Us" ? "active" : "")" asp-controller="Home" asp-action="AboutUs">About us</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link @((string)ViewData["Title"] == "All Books" ? "active" : "")" asp-controller="Book" asp-action="GetAllBooks">All books</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link @((string)ViewData["Title"] == "Add New Book" ? "active" : "")" asp-controller="Book" asp-action="AddNewBook">Add New Book</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="admin" asp-controller="home" asp-action="index">Admin</a>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <partial name="_loginInfo" />
+                </form>
+            </div>
+        </div>
+    </nav>
+</header>
+
+
+@*Using to show New Book alert *@
+@if (newBookAlertModel.DisplayNewBookAlert)
+{
+    <div class="alert alert-info" role="alert">
+        <p class="display-6">@newBookAlertModel.Alert</p>
+    </div>
+}
+
+@if (thirdPartyBook.DisplayNewBookAlert)
+{
+    <div class="alert alert-info" role="alert">
+        <p class="display-6">@thirdPartyBook.Alert</p>
+    </div>
+}
+

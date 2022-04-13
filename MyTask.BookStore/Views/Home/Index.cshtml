@@ -1,0 +1,30 @@
+﻿@model IEnumerable<BookModel>
+@inject MyTask.BookStore.Repository.IBookRepository bookRepos
+
+@section style{
+<link rel="stylesheet" href="~/css/FormStyle.css" />
+}
+
+<div class="container">
+    <div class="jumbotron" >
+        <h1 class="display-4">Welcome To The Book Store</h1>
+        <p class="lead">This is a book store site, you can read or bay books from this site.</p>
+        <hr class="my-4">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget tellus ullamcorper, bibendum lorem sed, scelerisque purus.</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+        </p>
+
+    </div>
+
+    <h1 class="display-5">Top Books </h1>
+    <hr />
+    @*Add codes to using vie commponents to show TopBooks*@
+    @*first Way*@
+    @* @await Component.InvokeAsync("TopBooks")*@
+    @*Second way*@
+    <vc:top-books count="3"></vc:top-books>
+    <div class="row">
+       
+    </div>
+</div>

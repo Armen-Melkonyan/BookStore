@@ -1,0 +1,13 @@
+[
+  {
+    "inputFile": [
+      "wwwroot/css/site.css",
+      "wwwroot/css/FormStyle.css"
+    ],
+    "outputFileName": "wwwroot/css/site.min.css",
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+  }
+]

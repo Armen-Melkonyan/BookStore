@@ -1,0 +1,15 @@
+﻿@model IEnumerable<BookModel>
+
+<div class="container">
+
+    <p class="display-6">All Books</p>
+
+    <div class="row">
+        @foreach (var book in Model)
+        {
+            <partial name="_bookThumbnail" model="@book"/>
+        }
+
+    </div>
+
+</div>

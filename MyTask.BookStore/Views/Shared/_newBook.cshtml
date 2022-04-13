@@ -1,0 +1,30 @@
+﻿<div class="container">
+    <table class="table">
+
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Language</th>
+                <th>Category</th>
+                <th>Releas Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var book in Model)
+            {
+                <tr>
+                    <td>@book.Title</td>
+                    <td>@book.Author</td>
+                    <td>@book.Language</td>
+                    <td>@book.Category</td>
+                    <td>@book.ReleaseDate</td>
+                    <td>action</td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>

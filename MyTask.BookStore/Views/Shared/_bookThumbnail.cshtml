@@ -1,0 +1,11 @@
+﻿@model BookModel
+<div class="col-md-3">
+    <div class="card" style="width: 16rem; margin: 2px">
+        <img src="@(string.IsNullOrEmpty(Model.CoverImageUrl) ? "/Images/jumbotron.jpg" : @Model.CoverImageUrl)" class="img-thumbnail" style="width:100%; height:400px;" alt="Cover image">
+        <div class="card-body">
+            <h5 class="card-title">@(string.IsNullOrEmpty(Model.Title) ? "Title is not avalable." : @Model.Title) </h5>
+            <p class="card-text">@(string.IsNullOrEmpty(Model.Description) ? "Description is not avalable." : @Model.Description) </p>
+            <a asp-route="BookDetails" asp-route-Id="@Model.ID" class="btn btn-primary">See details</a>
+        </div>
+    </div>
+</div>
